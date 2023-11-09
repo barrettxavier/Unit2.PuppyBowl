@@ -9,6 +9,7 @@
 body {
   margin: 0px;
   padding: 0px;
+  height: fit-content;
   box-sizing: border-box;
   background-color: #E9F1F7;
   color: #131B23;
@@ -31,6 +32,11 @@ body {
   display: flex;
   justify-content: center;
   width: 100vw;
+  
+}
+
+.puppyForm {
+  background: #d9e9f3;;
 }
 
 .intro {

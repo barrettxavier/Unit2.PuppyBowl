@@ -1,4 +1,5 @@
 const main = document.querySelector(`main`);
+main.setAttribute(`style`, `padding-left: 3rem; display: flex; flex-wrap: wrap; justify-content: center;`)
 
 const state = {
   puppyNames: [],
@@ -16,13 +17,12 @@ const getDataApiFunction = async () => {
     const playerData = dataPull.data;
     console.log(playerData)
     
-    
+  
     // Update state with puppy names
     state.puppyNames = playerData.players.map(player => player.name);
     state.breed = playerData.players.map(player => player.breed);
     state.status = playerData.players.map(player => player.status);
     state.imgURL = playerData.players.map(player => player.imageUrl);
-
 
     // console.log(state.puppyNames);
     // console.log(state.breed);
@@ -35,11 +35,44 @@ const getDataApiFunction = async () => {
   }
 };
 
+const form = document.querySelector(`form`);
+form.addEventListener(`submit`, async (event) => {
+  event.preventDefault();
+  console.log(`submit`);
+
+  const nameInput = document.querySelector(`#puppy-name`);
+  const imgInput = document.querySelector(`#img-url`);
+  // const descriptionInput = document.querySelector(`#description`);
+  const statusInput = document.querySelector(`#status`);
+  
+
+  const response = await fetch(`${apiURL}/players`, {
+    method: `POST`,
+    headers: {
+      "Content-Type": `application/json`,
+    },
+    body: JSON.stringify({
+      name: nameInput.value,
+      imageUrl: imgInput.value,
+      // description: descriptionInput.value,
+      status: statusInput.value,
+    })
+  });
+
+  const newPuppy = await response.json();
+  console.log(newPuppy);
+
+});
+
+
+
+
 
 const createList = () => {
   main.innerHTML = (``);
   for (let i = 0; i < state.puppyNames.length; i++) {
     const li = document.createElement(`li`);
+    li.setAttribute(`style`, `margin-right: 5rem; width: 400px; padding: 5px;`)
     li.textContent = state.puppyNames[i];
     main.appendChild(li);
     
@@ -52,10 +85,10 @@ const createList = () => {
       console.log(event.target.innerText);
 
       const html = `
-      <div class"card-container" style="margin-top: 5rem; margin-bottom: 2rem; display: flex; justify-content: center; height: fit-contents; width: 100vw;">
-        <div class"card" style="border-radius: 15px; height: fit-contents; width: 400px; background-color: #131B23; padding: 1rem;">
+      <div class"card-container" style="margin-top: 2rem; margin-bottom: 2rem; display: flex; justify-content: center; height: fit-contents; width: 100vw;">
+        <div class"card" style="border-radius: 15px; height: fit-content; min-width: 400px; width: fit-content; background-color: #131B23; padding: 1rem;">
         <h1 style="font-variant: small-caps; color: white; text-align: center;"> ${singlePuppyName} </h1>
-        <img src="${puppyImage}" style="width: 300px;" alt="image of a puppy">
+        <img src="${puppyImage}" style="height: 300px;" alt="image of a puppy">
         <h3 style="color: white; text-align: center; font-variant: small-caps;"> Description </h3>
         <p style="color: white; text-align: center; ">${puppyBreed}</p>
         <p></p>
@@ -69,8 +102,6 @@ const createList = () => {
       <button id="backBtn" style="font-size: 1.5rem;"> Back </button>
       
       `;
-
-
       main.innerHTML= html;
 
       const backBtn = document.getElementById(`backBtn`);
@@ -78,8 +109,6 @@ const createList = () => {
         createList();
       });
     });
-
-    
   }
 }
 
