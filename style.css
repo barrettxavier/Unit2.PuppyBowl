@@ -2,23 +2,56 @@
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.puppy-roster {
+  text-align: center;
+}
+
 body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  /* background-image: url(images/pexels-julissa-helmuth-12538673.jpg);
-  background-size: cover; */
+  background-color: #E9F1F7;
+  color: #131B23;
 }
 
 .nav-section {
   width: 100vw;
   height: 70px;
-  background: rgb(255, 255, 255, 0.5);
+  background: #b8d7e9;
 }
 
 .navbar h1 {
+  color: #131B23;
   margin: 0px;
   margin-top: 1rem;
+}
+
+.intro-container {
+  margin-top: 6rem;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+}
+
+.intro a {
+  color: white;
+  text-decoration: none;
+}
+
+.intro button {
+  font-size: 1.5rem;
+  background-color: #2274A5;
+  border-radius: 5px;
+}
+
+.navbar h1 a {
+  color: #131B23;
+  text-decoration: none;
 }
 
 .navbar {
@@ -37,7 +70,7 @@ body {
 }
 
 .navbar-links li a {
-  color: black;
+  color: #131B23;
   font-weight: bolder;
   text-decoration: none;
 }
