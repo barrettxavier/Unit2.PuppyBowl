@@ -11,8 +11,9 @@ const getDataApiFunction = async () => {
     const response = await fetch(`${apiURL}/players`);
     const dataPull = await response.json();
     const playerData = dataPull.data;
-    console.log(playerData);
-
+    const sss = playerData.players;
+    console.log(sss);
+    
     // Update state with puppy names
     state.puppyNames = playerData.players.map(player => player.name);
 
@@ -24,24 +25,61 @@ const getDataApiFunction = async () => {
   }
 };
 
+
 const createList = () => {
-  const ul = document.createElement(`ul`);
-  state.puppyNames.forEach(name => {
+  for (let i = 0; i < state.puppyNames.length; i++) {
     const li = document.createElement(`li`);
-    li.innerText = name;
-    ul.appendChild(li);
+    li.textContent = state.puppyNames[i];
+    main.appendChild(li);
+    
+    const singlePuppyName = state.puppyNames[i];
 
     li.addEventListener(`click`, (event) => {
       console.log(event.target.innerText);
 
       const html = `
-      <h1> Hello </h1>
+      <div class"card-container" style="margin-bottom: 2rem; display: flex; justify-content: center; height: fit-contents; width: 100vw;">
+        <div class"card" style="height: 500px; width: 400px; background-color: lightgrey; padding: 1rem;">
+        <h1 style="text-align: center;"> ${singlePuppyName} </h1>
+        <img src="" alt="image of a puppy">
+        <h3 style="text-align: center;"> Description </h3>
+        
+        <p></p>
+
+        </div>
+        
+      </div>
+
+      <button> Back </button>
+      
       `
       main.innerHTML= html;
-    })
-  });
-  main.appendChild(ul);
-};
+
+    });
+  }
+}
+
+
+
+
+
+
+
+
+// const createList = () => {
+//   const ul = document.createElement(`ul`);
+//   state.puppyNames.forEach(name => {
+//     const li = document.createElement(`li`);
+//     li.innerText = name;
+//     ul.appendChild(li);
+
+//     li.addEventListener(`click`, (event) => {
+//       console.log(event.target.innerText);
+
+//     })
+//   });
+//   main.appendChild(ul);
+// };
 
 // const clickableLink = () => {
 //   const clickPlayer = 
